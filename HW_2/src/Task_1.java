@@ -6,25 +6,25 @@ public class Task_1 {
     public static void main(String[] args) {
         boolean flag = false;
         while (!flag) {
-            String value = prompt("Введите дробное число: ");
+            String value = prompt("Р’РІРµРґРёС‚Рµ РґСЂРѕР±РЅРѕРµ С‡РёСЃР»Рѕ: ");
             if (checkIfInputText(value)) {
-                System.out.println("Вы ввели: " + value);
+                System.out.println("Р’С‹ РІРІРµР»Рё: " + value);
                 flag = true;
             }
         }
     }
 
-     static String prompt(String message) {          // метод для ввода строки;
+     static String prompt(String message) {          // РјРµС‚РѕРґ РґР»СЏ РІРІРѕРґР° СЃС‚СЂРѕРєРё;
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         return in.nextLine();
     }
 
-    static boolean checkIfInputText(String input){ // метод проверяющий возможно ли преобразования строки во Float число.
+    static boolean checkIfInputText(String input){ // РјРµС‚РѕРґ РїСЂРѕРІРµСЂСЏСЋС‰РёР№ РІРѕР·РјРѕР¶РЅРѕ Р»Рё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ СЃС‚СЂРѕРєРё РІРѕ Float С‡РёСЃР»Рѕ.
         try {
             Float.parseFloat(input);
         } catch (NumberFormatException e){
-            System.out.println("Некорректный ввод. Надо ввести число");
+            System.out.println("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ. РќР°РґРѕ РІРІРµСЃС‚Рё С‡РёСЃР»Рѕ");
             return false;
         }
         return true;

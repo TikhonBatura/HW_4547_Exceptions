@@ -8,7 +8,7 @@ public class Task_4 {
         while (!flag) {
             String value;
             try {
-                value = prompt("Введите строку: ");
+                value = prompt("Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: ");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
@@ -18,13 +18,13 @@ public class Task_4 {
         }
     }
 
-    static String prompt(String message) {          // метод для ввода строки;
+    static String prompt(String message) {          // РјРµС‚РѕРґ РґР»СЏ РІРІРѕРґР° СЃС‚СЂРѕРєРё;
         Scanner in = new Scanner(System.in);
         String line = "";
         System.out.print(message);
         String userInput = in.nextLine();
         if ((line.equals(userInput))) {
-            throw new IllegalArgumentException("Строка не может быть пустой");
+            throw new IllegalArgumentException("РЎС‚СЂРѕРєР° РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚РѕР№");
         } return userInput;
     }
 
