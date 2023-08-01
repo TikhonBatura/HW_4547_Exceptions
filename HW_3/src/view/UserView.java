@@ -30,9 +30,11 @@ public class UserView {
         while (!flag) {
             userSTR = userInput("here -> ");
             userArr = data.getData(userSTR);
-            if (userArr.length == 4){
+            String [] userArrTest = new String[]{"Sidorov", "Sidor", "Ivanovich", "24.03.1999", "6446260", "f"};
+            if (userArr.length == 6){
                 try {
                     parseData.checkUserData(userArr);
+                    parseData.checkUserData(userArrTest);
                 } catch (CheckSexException e) {
                     System.out.println(e.getMessage());
                 } catch (CheckBirthdayExceptions checkBirthdayExceptions){

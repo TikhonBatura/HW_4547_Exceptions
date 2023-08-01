@@ -31,9 +31,11 @@ public class ParseData {
                     this.userData.setUserPhoneNumber(Integer.parseInt(userData[i]));
 
             } else
-
-                this.userData.setUserName(userData[i], userData[i+1], userData[i+2]);
-
+                try {
+                    this.userData.setUserName(userData[i], userData[i + 1], userData[i + 2]);
+                } catch (IndexOutOfBoundsException e){
+                    e.getMessage();
+                }
         }
         System.out.println(Arrays.toString(userData));
     }
