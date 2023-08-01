@@ -1,22 +1,22 @@
 package model;
 
 public class UserData {
-    String userName;
+    String [] userName;
     String userBirthDate;
-    int UserPhoneNumber;
-    char UserSex;
+    int userPhoneNumber;
+    String userSex;
 
     public UserData (){
 
     }
-    public UserData (String userName, String userBirthDate, int userPhoneNumber, char userSex){
-        this.userName = userName;
+    public UserData (String [] userName, String userBirthDate, int userPhoneNumber, String userSex){
+        this.userName = new String[3];
         this.userBirthDate = userBirthDate;
-        this.UserPhoneNumber = userPhoneNumber;
-        this.UserSex = userSex;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userSex = userSex;
     }
 
-    public String getUserName() {
+    public String[] getUserName() {
         return userName;
     }
 
@@ -25,15 +25,15 @@ public class UserData {
     }
 
     public int getUserPhoneNumber() {
-        return UserPhoneNumber;
+        return userPhoneNumber;
     }
 
-    public char getUserSex() {
-        return UserSex;
+    public String getUserSex() {
+        return userSex;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String lastname, String name, String surname ) {
+        this.userName = new String[]{lastname, name, surname};
     }
 
     public void setUserBirthDate(String userBirthDate) {
@@ -41,10 +41,23 @@ public class UserData {
     }
 
     public void setUserPhoneNumber(int userPhoneNumber) {
-        UserPhoneNumber = userPhoneNumber;
+        this.userPhoneNumber = userPhoneNumber;
     }
 
-    public void setUserSex(char userSex) {
-        UserSex = userSex;
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+
+    private String getInfo(){
+        return String.format("User Name - " + userName + "\n"
+                                + "Date of birth - " + userBirthDate + "\n"
+                                + "Phone number - " + userPhoneNumber + "\n"
+                                + "Sex - " + userSex + "\n");
+    }
+    @Override
+    public String toString(){
+
+        return getInfo();
     }
 }

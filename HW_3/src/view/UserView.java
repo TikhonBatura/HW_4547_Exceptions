@@ -1,20 +1,23 @@
 package view;
 
-import model.UserData;
-import spliter.DataSplit;
+import control.DataSplit;
+import control.ParseData;
+import exceptions.CheckBirthdayExceptions;
+import exceptions.CheckSexException;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class UserView {
     public UserView(){
     }
-
-    public void run(){
+    ParseData parseData = new ParseData();
+    public void run() {
 
         System.out.println("=======Program START========");
         System.out.println();
         System.out.println("Please enter info about user in one line, separated by space: \n");
-        System.out.println("1. Last name First name Name by father");
+        System.out.println("1. [Last name First name Surname]");
         System.out.println("2. Date of Birth in format dd.mm.yyyy");
         System.out.println("3. Telephone number (just digits)");
         System.out.println("4. Sex: 'f' - female or 'm' - male");
@@ -22,15 +25,25 @@ public class UserView {
         DataSplit data = new DataSplit();
 
         boolean flag = false;
-        while (!flag){
-            String userSTR = userInput("here -> ");
-            data.getData(userSTR);
-            flag = true;
+        String userSTR = null;
+        String [] userArr = new String[0];
+        while (!flag) {
+            userSTR = userInput("here -> ");
+            userArr = data.getData(userSTR);
+            if (userArr.length == 4){
+                try {
+                    parseData.checkUserData(userArr);
+                } catch (CheckSexException e) {
+                    System.out.println(e.getMessage());
+                } catch (CheckBirthdayExceptions checkBirthdayExceptions){
+                    flag = true;
+                }
+            }
         }
-        System.out.println(data);
 
-
-
+        System.out.println("==============");
+        System.out.println(Arrays.toString(userArr));
+        System.out.println("userArr.length = " + userArr.length);
 
     }
 

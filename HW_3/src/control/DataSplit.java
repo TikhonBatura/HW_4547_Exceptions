@@ -1,16 +1,14 @@
-package spliter;
+package control;
 
 public class DataSplit {
-    String data;
+    String [] data;
 
-    private void data (String data){
+    private void data (String [] data){
         this.data = data;
     }
 
     public String [] getData (String data){
-
-        int code = checkData(data);
-        parseCode(code);
+        checkData(data);
         return data.split(" ");
     }
 
@@ -30,20 +28,21 @@ public class DataSplit {
         }
     }
 
-    private int checkData(String data) {
+    private void checkData(String data) {
 
+        int codeError = -1;
         if (data.equals(" ") || (data.isEmpty())){
-            return 0;
+            codeError = 0;
         }
 
         String [] result = data.split(" ");
 
-        if (result.length < 4 && result.length > 1) {
-            return 1;
+        if (result.length < 6 && result.length > 1) {
+            codeError = 1;
         }
-        if (result.length > 4) {
-            return 2;
+        if (result.length > 6) {
+            codeError = 2;
         }
-        return 3;
+        parseCode(codeError);
     }
 }
