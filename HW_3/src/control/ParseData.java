@@ -1,42 +1,56 @@
 package control;
 
-import exceptions.CheckBirthdayExceptions;
-import exceptions.CheckSexException;
+import exceptions.ParseDataException;
+import exceptions.SexException;
+import exceptions.UserNameExceptions;
 import model.UserData;
 
-import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 public class ParseData {
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            .withResolverStyle(ResolverStyle.STRICT);
+    CheckBirth checkBirth = new CheckBirth();
 
     UserData userData = new UserData();
 
-    public void checkUserData (String [] userData){
+    public void parseUserData(String [] checkStrings, UserData userData){
 
-        for (int i = 0; i < userData.length; i++){
-            if (userData[i].length() == 1 && userData[i].equals("f") || userData[i].equals("m")) {
-                try {
-                    this.userData.setUserSex(userData[i]);
-                } catch (CheckSexException e) {
-                    e.getMessage();
+        try {
+            for (int i = 0; i < checkStrings.length; i++) {
+
+
+                    if (checkStrings[i].length() == 1 && checkStrings[i].equals("f") || checkStrings[i].equals("m")) {
+                        try {
+                        userData.setUserSex(checkStrings[i]);
+
+                        } catch (IllegalArgumentException e) {
+                            throw new SexException(e.getMessage());
+                        }
+
+                    } else if (Character.isDigit(checkStrings[i].charAt(0)) && checkStrings[i].contains(".")) {
+
+                            if (!checkBirth.CheckBirthDate(checkStrings[i])) {
+                                userData.setUserBirthDate(checkStrings[i]);
+                            }
+
+                    } else if (Character.isDigit(checkStrings[i].charAt(0)) && !(checkStrings[i].contains("."))) {
+                        userData.setUserPhoneNumber(Integer.parseInt(checkStrings[i]));
+
+                    } else if ((checkStrings[i].matches("[A-Za-z]+"))) {
+                        try {
+                            userData.setUserName(checkStrings[i], checkStrings[i + 1], checkStrings[i + 2]);
+                            i += 2;
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new UserNameExceptions(e.getMessage());
+                        }
+                    }
                 }
 
-            } else if (Character.isDigit(userData[i].charAt(0)) && userData[i].contains(".")){
-                try{
-                    this.userData.setUserBirthDate(userData[i]);
-                } catch (RuntimeException e){
-                    throw new CheckBirthdayExceptions(userData[i]);
-                }
-
-            } else if (Character.isDigit(userData[i].charAt(0)) && !(userData[i].contains("."))){
-                    this.userData.setUserPhoneNumber(Integer.parseInt(userData[i]));
-
-            } else
-                try {
-                    this.userData.setUserName(userData[i], userData[i + 1], userData[i + 2]);
-                } catch (IndexOutOfBoundsException e){
-                    e.getMessage();
-                }
-        }
-        System.out.println(Arrays.toString(userData));
+            }catch (RuntimeException e){
+                throw new ParseDataException(checkStrings);
+            }
+        System.out.println(userData.toString());
     }
 }

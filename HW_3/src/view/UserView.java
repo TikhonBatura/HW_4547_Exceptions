@@ -2,8 +2,8 @@ package view;
 
 import control.DataSplit;
 import control.ParseData;
-import exceptions.CheckBirthdayExceptions;
-import exceptions.CheckSexException;
+import exceptions.UserNameExceptions;
+import model.UserData;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,6 +12,8 @@ public class UserView {
     public UserView(){
     }
     ParseData parseData = new ParseData();
+    UserData userData = new UserData();
+
     public void run() {
 
         System.out.println("=======Program START========");
@@ -27,20 +29,21 @@ public class UserView {
         boolean flag = false;
         String userSTR = null;
         String [] userArr = new String[0];
+
+
         while (!flag) {
             userSTR = userInput("here -> ");
             userArr = data.getData(userSTR);
-            String [] userArrTest = new String[]{"Sidorov", "Sidor", "Ivanovich", "24.03.1999", "6446260", "f"};
+
             if (userArr.length == 6){
-                try {
-                    parseData.checkUserData(userArr);
-                    parseData.checkUserData(userArrTest);
-                } catch (CheckSexException e) {
-                    System.out.println(e.getMessage());
-                } catch (CheckBirthdayExceptions checkBirthdayExceptions){
-                    flag = true;
-                }
+                flag = true;
             }
+        }
+
+        try {
+            parseData.parseUserData(userArr, userData);
+        } catch (UserNameExceptions e){
+            System.out.println(e.getMessage());
         }
 
         System.out.println("==============");

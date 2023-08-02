@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class UserData {
     String [] userName;
     String userBirthDate;
@@ -50,7 +52,7 @@ public class UserData {
 
 
     private String getInfo(){
-        return String.format("User Name - " + userName + "\n"
+        return String.format("User Name - " + Arrays.toString(userName) + "\n"
                                 + "Date of birth - " + userBirthDate + "\n"
                                 + "Phone number - " + userPhoneNumber + "\n"
                                 + "Sex - " + userSex + "\n");
