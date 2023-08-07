@@ -1,0 +1,10 @@
+User Name - [Ivanov, Ivan, Ivanovich]
+Date of birth - 27.03.2013
+Phone number - 6126260
+Sex - m
+
+User Name - [Ivanov, Jan, Ivanovich]
+Date of birth - 13.06.2013
+Phone number - 555444
+Sex - m
+

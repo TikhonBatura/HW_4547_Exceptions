@@ -1,3 +1,7 @@
+/*
+Анализирует полученную информацию.
+ */
+
 package control;
 
 import exceptions.ParseDataException;
@@ -9,19 +13,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 public class ParseData {
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-            .withResolverStyle(ResolverStyle.STRICT);
+
     CheckBirth checkBirth = new CheckBirth();
 
-    UserData userData = new UserData();
 
-    public void parseUserData(String [] checkStrings, UserData userData){
+    public void parseUserData(String [] checkStrings, UserData userData){       // проверка введенных строк на соответствие параметрам.
 
         try {
             for (int i = 0; i < checkStrings.length; i++) {
 
 
-                    if (checkStrings[i].length() == 1 && checkStrings[i].equals("f") || checkStrings[i].equals("m")) {
+                    if (checkStrings[i].length() == 1 && checkStrings[i].equals("f") || checkStrings[i].equals("m")) {      // проверка пола пользователя;
                         try {
                         userData.setUserSex(checkStrings[i]);
 
@@ -29,16 +31,16 @@ public class ParseData {
                             throw new SexException(e.getMessage());
                         }
 
-                    } else if (Character.isDigit(checkStrings[i].charAt(0)) && checkStrings[i].contains(".")) {
+                    } else if (Character.isDigit(checkStrings[i].charAt(0)) && checkStrings[i].contains(".")) {             // проверка даты рождения пользователя;
 
                             if (!checkBirth.CheckBirthDate(checkStrings[i])) {
                                 userData.setUserBirthDate(checkStrings[i]);
                             }
 
-                    } else if (Character.isDigit(checkStrings[i].charAt(0)) && !(checkStrings[i].contains("."))) {
+                    } else if (Character.isDigit(checkStrings[i].charAt(0)) && !(checkStrings[i].contains("."))) {          // проверка номера телефона пользователя;
                         userData.setUserPhoneNumber(Integer.parseInt(checkStrings[i]));
 
-                    } else if ((checkStrings[i].matches("[A-Za-z]+"))) {
+                    } else if ((checkStrings[i].matches("[A-Za-z]+"))) {                                              // проверка полного имени пользователя;
                         try {
                             userData.setUserName(checkStrings[i], checkStrings[i + 1], checkStrings[i + 2]);
                             i += 2;
@@ -51,6 +53,21 @@ public class ParseData {
             }catch (RuntimeException e){
                 throw new ParseDataException(checkStrings);
             }
-        System.out.println(userData.toString());
+//        System.out.println(userData.toString());
     }
+
+    public boolean checkUserDataIfNull (UserData userData){             // проверка на наличие пустых полей;
+        if (userData.getUserName() == null
+                | userData.getUserSex() == null
+                | userData.getUserBirthDate() == null
+                | (userData.getUserPhoneNumber() == 0)){
+            return false;
+        }else return true;
+    }
+
+    public String getUserLastName(UserData userData){                   // получение фамилии пользователя
+        String [] userArr = userData.getUserName();
+        return userArr[0];
+    }
+
 }

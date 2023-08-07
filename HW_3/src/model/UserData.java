@@ -1,3 +1,6 @@
+/*
+Класс в котором собирается информация о пользователе.
+ */
 package model;
 
 import java.util.Arrays;
@@ -21,6 +24,7 @@ public class UserData {
     public String[] getUserName() {
         return userName;
     }
+
 
     public String getUserBirthDate() {
         return userBirthDate;
@@ -49,6 +53,7 @@ public class UserData {
     public void setUserSex(String userSex) {
         this.userSex = userSex;
     }
+
 
 
     private String getInfo(){

@@ -18,13 +18,13 @@ public class DataSplit {
                 System.out.println("Nothing was input");
                 break;
             case 1:
-                System.out.println("You have input less information than it need");
+                System.out.println("You have input less information than it need\n");
                 break;
             case 2:
-                System.out.println("You have input more information than it need");
+                System.out.println("You have input more information than it need\n");
                 break;
             default:
-                System.out.println("Data was successful inputted");
+                System.out.println("Data was successful inputted\n");
         }
     }
 

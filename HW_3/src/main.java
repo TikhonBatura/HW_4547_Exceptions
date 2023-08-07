@@ -1,3 +1,8 @@
+/*
+Стартовый модуль.
+ */
+
+
 import view.UserView;
 
 public class main {
